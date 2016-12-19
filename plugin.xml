@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com-asadpalekar-plugins-estimotelocation" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>EstimoteLocation</name>
+
+    <js-module name="EstimoteLocation" src="www/EstimoteLocation.js">
+        <clobbers target="EstimoteLocation"/>
+    </js-module>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="LocationManager">
+                <param name="ios-package" value="CDVLocationManager"/>
+            </feature>
+        </config-file>
+
+        <framework src="src/ios/EstimoteIndoorLocationSDK/libEstimoteIndoorSDK.a" custom="true" />
+        <framework src="CoreBluetooth.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="SystemConfiguration.framework" />
+
+        <framework src="CoreMotion.framework" />
+        <framework src="AudioToolbox.framework" />
+        <framework src="MediaPlayer.framework" />
+        <framework src="MessageUI.framework" />
+        <framework src="libz.tbd" />
+
+
+        <framework src="src/ios/Frameworks/EstimoteSDK.framework" custom="true" />
+
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="EstimoteLocation">
+                <param name="ios-package" value="EstimoteLocation"/>
+            </feature>
+        </config-file>
+        <source-file src="src/ios/EstimoteLocation.swift"/>
+        <source-file src="src/ios/LocationViewController.swift"/>
+        <source-file src="src/ios/EstimoteLocation-Bridging-Header.h"/>
+        <source-file src="src/ios/LocationViewController.xib"/>
+        <source-file src="src/ios/EstimoteIndoorLocationSDK"/>
+
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>This app would like to scan for beacons when in the background.</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+            <string>This app would like to scan for beacons while it is in use.</string>
+        </config-file>
+
+        <dependency id="cordova-plugin-add-swift-support" version="1.5.0"/>
+    </platform>
+</plugin>
