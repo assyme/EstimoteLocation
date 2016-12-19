@@ -40,26 +40,24 @@
             status: CDVCommandStatus_ERROR
         )
 
-        let msg = command.arguments[0] as? String ?? ""
+        let creds = command.arguments[0] as! Dictionary<String,String>
 
-        if msg.characters.count > 0 {
-
-            let locationView = LocationViewController()
-            /* UIAlertController is iOS 8 or newer only. */
-
-
-            self.viewController?.present(
-                locationView,
-                animated: true,
-                completion: nil
-            )
+        let locationView = LocationViewController()
+        /* UIAlertController is iOS 8 or newer only. */
+        locationView.setEstimoteCredentials(appId: creds["appId"]!, appToken: creds["appToken"]!, locationId: creds["locationId"]!)
 
 
-            pluginResult = CDVPluginResult(
-                status: CDVCommandStatus_OK,
-                messageAs: msg
-            )
-        }
+        self.viewController?.present(
+            locationView,
+            animated: true,
+            completion: nil
+        )
+
+
+        pluginResult = CDVPluginResult(
+            status: CDVCommandStatus_OK
+        )
+
 
         self.commandDelegate!.send(
             pluginResult,
