@@ -4,8 +4,8 @@ exports.echo = function(arg0, success, error) {
     exec(success, error, "EstimoteLocation", "echo", [arg0]);
 };
 
-exports.indoor = function(arg0, success,error){
-    exec(success, error, "EstimoteLocation", "indoor", [arg0]);
+exports.indoor = function(arg0,arg1 ,success,error){
+    exec(success, error, "EstimoteLocation", "indoor", [arg0, arg1]);
 };
 
 
